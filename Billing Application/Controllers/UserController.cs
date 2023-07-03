@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Billing_Application.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Billing_Application.Controllers
 {
@@ -8,5 +9,23 @@ namespace Billing_Application.Controllers
         {
             return View();
         }
+
+
+        public IActionResult GetCustomer()
+        {
+            return View();
+        }
+
+        public IActionResult GetProduct(Customer customer)
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult UpdateCustomer(int CustomerId)
+        {
+            return View();
+
+        }
+
     }
 }
