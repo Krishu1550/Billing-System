@@ -3,7 +3,9 @@ using Billing_Application.Services;
 using Billing_Application.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Billing_Application.Data;
+using Billing_Application.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +18,19 @@ builder.Services.AddDbContext<BillDb>(option =>
 
 });
 
-builder.Services.AddDefaultIdentity<Billing_ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<Billing_ApplicationContext>();
+builder.Services.AddDbContext<Billing_ApplicationContext>(option =>
+{
+	option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+});
+
+//builder.Services.AddDefaultIdentity<Billing_ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+ //   .AddEntityFrameworkStores<Billing_ApplicationContext>();
+
+builder.Services.AddIdentity<Billing_ApplicationUser, IdentityRole> ().AddEntityFrameworkStores<BillDb>().AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(op => op.LoginPath = "/Authentication/Login");
+
 
 builder.Services.AddTransient<IBilling, SBilling>();
 builder.Services.AddTransient<ICustomer, SCustomer>();  

@@ -9,5 +9,12 @@ namespace Billing_Application.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the Billing_ApplicationUser class
 public class Billing_ApplicationUser : IdentityUser
 {
+	public int AccountId { get; set; }
+
+	public string UserName { get; set; }
+
+	public string Password { get; set; }
+
+	public string Role { get; set; }
 }
 

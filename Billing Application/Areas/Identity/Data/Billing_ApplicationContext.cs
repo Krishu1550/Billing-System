@@ -12,6 +12,10 @@ public class Billing_ApplicationContext : IdentityDbContext<Billing_ApplicationU
     {
     }
 
+
+
+
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
